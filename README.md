@@ -92,6 +92,12 @@ pdl> demo prima
 pdl> <control>-d
 $
 ```
+or run PDL in any other way you want
+```
+$ perl -MPDL -E 'say zeroes(10)->xvals'
+[0 1 2 3 4 5 6 7 8 9]
+$ 
+```
 The container is a debian installation running on top of your host,
 but insulated from it, so you may run other debian programs such as
 apt-get mostly without affecting the host.  
