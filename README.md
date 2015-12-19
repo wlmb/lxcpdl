@@ -220,3 +220,7 @@ and their dependencies.
 
 ##Authors
 Victoria Domínguez del Angel and W. Luis Mochán <mochan@fis.unam.mx>
+
+##License
+GPL v2.0
+
