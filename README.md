@@ -6,7 +6,7 @@ This is a full PDL installation within an LXC container running under
 Debian/Wheezy that can be used within a host running a mostly
 arbitrary linux flavor.  The idea is that within the container, PDL
 and all the packages required for its use are already installed,
-saving time and effort and allowing new users to test a full pdl
+saving time and allowing new users to test a full pdl
 installation with little effort. 
 
 This is my first attempt, so things may go wrong. Proceed with
@@ -36,7 +36,7 @@ You would have to clone the repository
 $ git clone https://github.com/wlmb/lxcpdl.git
 $
 ```
-(it will take a long time; it's size is about 300MB+).
+(it will take some time; it's size is about 300MB+).
 As github doesn't allow very large files, and I don't know how to
 commit files owned by root, I made a tar file and then split it in
 pieces. First join the pieces of the tar file:
@@ -62,7 +62,7 @@ As an ordinary user running X, from an xterm run the command
 $ xhost +local:
 $
 ```
-to allow the container to use your X display. Then fire your container as a daemon
+if you want to allow the container to use your X display. Then fire your container as a daemon
 ```
 $ sudo lxc-start -n pdl -d
 $
@@ -72,9 +72,9 @@ and connect to it
 $ sudo lxc-attach -n pdl
 #
 ```
-If no errors, that command will take you to the container and you will
-be working within the container as superuser. Don't worry too much, as
-you cannot damage your host. Anyway, there is an ordinary sudoer user
+If no errors, that command will take you to a sh session within the container where you will
+be working as superuser. Don't worry too much, as
+your actions cannot damage your host (they only affect the container). Anyway, there is an ordinary sudoer user
 (login: user, initial password: user) if you want to drop privileges. 
 ```
 # su user
@@ -123,7 +123,7 @@ $
 ```
 
 ## Configuration
-You may have to modify the network settings `lxc.network.xxx` of the
+You may have to modify the network settings `lxc.network....` of the
 container in the file `/var/lib/lxc/pdl/config` if they are
 incompatible with your system. I set up my network following
 <https://wiki.debian.org/LXC/LibVirtDefaultNetwork>. 
