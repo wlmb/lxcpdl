@@ -118,7 +118,7 @@ $
 ```
 If you don't like it, you may remove it with
 ```
-$ sudo lxc-delete -n pdl
+$ sudo lxc-destroy -n pdl
 $
 ```
 
