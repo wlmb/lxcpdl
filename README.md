@@ -16,7 +16,7 @@ pdl> gplot(zeroes(50)->xlinvals(0,15)->sin)
 ##Authors
 Victoria Dominguez del Angel and W. Luis Mochan <mochan@fis.unam.mx>
 
-##Usage
+##Installation
 
 To run it you need a working lxc. In debian
 ```
@@ -24,14 +24,26 @@ $ sudo install lxc
 ...
 $
 ```
-As root untar the file pdl.tar.xz file under the root directory
+As github doesn't allow very large files, and I don't know how to
+commit files owned by root, I made a tar file and then split it in
+pieces. First join the pieces of the tar file:
 ```
-$ cd /; sudo tar xfJv pdl.tar.xz
+$ cat pieces-* >pdl.tar.xz
+$ 
+```
+As root untar the file pdl.tar.xz file under the lxc directory
+```
+$ cd /var/lib/lxc
+$ sudo tar xfJv  /path/to/pdl.tar.xz --numeric-owner
 ...
 $
 ```
+It seems the `--numeric-owner` option is important.
 This should populate the directory `/var/lib/lxc/pdl` with the container.
-To use it I do the following (I don't understand completely, but it has worked so far):
+
+##Usage
+To use it I do the following (I don't understand completely, but it
+has worked so far): 
 As an ordinary user, from an xterm run the command
 ```
 $ xhost +local:
@@ -87,6 +99,97 @@ $
 ```
 
 ## Configuration
-You may have to modify the network settings `lxc.network.xxx`of the container in the file `/var/lib/lxc/pdl/config` if they are incompatible with your system. I set up my network following <https://wiki.debian.org/LXC/LibVirtDefaultNetwork>.
-The line `lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none bind,optional,create=dir` allows the container to open X windows in the hosts display.
+You may have to modify the network settings `lxc.network.xxx` of the
+container in the file `/var/lib/lxc/pdl/config` if they are
+incompatible with your system. I set up my network following
+<https://wiki.debian.org/LXC/LibVirtDefaultNetwork>. 
+
+The line `lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none
+bind,optional,create=dir` allows the container to open X windows in
+the hosts display. 
+
+##Package contents
+
+Debian/Wheezy + deb-multimedia.org sources
+
+Debian packages:
+
+   apt-utils
+   aptitude
+   cmake
+   cpanminus
+   deb-multimedia-keyring
+   dialog
+   freeglut3-dev
+   gfortran
+   gnuplot-qt
+   lapack-dev
+   less
+   libcfitsio3-dev
+   libfridi-dev
+   libgd2-xpm-dev
+   libgif-dev
+   libgsl0-dev
+   libgtk-3-dev
+   libhdf4-dev
+   libhdf5-dev
+   libnetpbm10
+   libproj-dev
+   libterm-readline-perl-perl
+   libtiff4-dev
+   libxft-dev
+   libxi-dev
+   libxmu-dev
+   libxrender-dev
+   make
+   nano
+   netpbm
+   openssh-server
+   tmux
+   pgplot5
+   sharutils
+   sudo
+   wget
+   xterm
+
+CPAN packages:
+
+   Astro::FITS::Header
+   Astro::FITS::CFITSIO
+   Convert::UU
+   Devel::CheckLib
+   Data::Dumper
+   Devel::REPL
+   ExtUtils::F77
+   ExtUtils::MakeMaker
+   File::Map
+   File::Spec
+   File::Temp
+   Filter::Simple
+   Filter::Util::Call
+   Inline
+   Inline::C
+   Module::Compile
+   OpenGL
+   PGPLOT
+   Pod::Parser
+   Pod::Select
+   Prima
+   Storable
+   Test::Exception
+   Text::Balanced
+   Text::Bidi
+
+   PDL
+   PDL::Graphics::Gnuplot
+   PDL::Stats
+   PDL::LinearAlgebra
+   PDL::Graphics::Prima
+   PDL::IO::CSV
+   PDL::IO::DBI
+   
+
+and their dependencies.
+
+ 
 
