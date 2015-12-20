@@ -54,6 +54,24 @@ $
 It seems the `--numeric-owner` option is important.
 This should populate the directory `/var/lib/lxc/pdl` with the container.
 
+## Configuration
+You may have to modify the network settings `lxc.network.xxx` of the
+container in the file `/var/lib/lxc/pdl/config` if they are
+incompatible with your system. I set up my network following
+<https://wiki.debian.org/LXC/LibVirtDefaultNetwork>. 
+The safest configuration (no network) to test the system would comment
+out all the `lxc.network.xxx` lines and adding the single line
+```
+lxc.network.type = empty
+```
+
+The line
+`lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none
+bind,optional,create=dir` allows the container to open X windows in 
+the hosts display. 
+
+
+
 ##Usage
 To use it I do the following (I don't understand completely, but it
 has worked so far): 
@@ -122,17 +140,6 @@ $ sudo lxc-destroy -n pdl
 $
 ```
 
-## Configuration
-You may have to modify the network settings `lxc.network.xxx` of the
-container in the file `/var/lib/lxc/pdl/config` if they are
-incompatible with your system. I set up my network following
-<https://wiki.debian.org/LXC/LibVirtDefaultNetwork>. 
-
-The line
-`lxc.mount.entry = /tmp/.X11-unix tmp/.X11-unix none
-bind,optional,create=dir` allows the container to open X windows in 
-the hosts display. 
-
 ##Package contents
 
 Debian/Wheezy + deb-multimedia.org sources
@@ -148,7 +155,6 @@ Debian packages:
    freeglut3-dev
    gfortran
    gnuplot-qt
-   lapack-dev
    less
    libcfitsio3-dev
    libfridi-dev
@@ -158,6 +164,7 @@ Debian packages:
    libgtk-3-dev
    libhdf4-dev
    libhdf5-dev
+   liblapack-dev
    libnetpbm10
    libproj-dev
    libterm-readline-perl-perl
